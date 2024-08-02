@@ -1,7 +1,9 @@
 import math
 
+from typing import List, Tuple
 
-def is_prime(n):
+
+def is_prime(n: int) -> bool:
     """
     Given a number 'n', returns True if it is prime
 
@@ -25,7 +27,7 @@ def is_prime(n):
 
     return all(remainders)
 
-def are_twin_primes(p, q):
+def are_twin_primes(p: int, q: int) -> bool:
     """
     Given the numbers 'p' and 'q', return True if both are twin primes,
     that is, both are primes and are separated by two units (q = p+2)
@@ -43,7 +45,7 @@ def are_twin_primes(p, q):
 
     return False
 
-def marsenne(n):
+def get_marsenne_number(n: int) -> int:
     """
     Computes marsenne number M(n) = 2**n-1
 
@@ -58,7 +60,7 @@ def marsenne(n):
 
     return 2**n - 1
 
-def is_marsenne_prime(n):
+def is_marsenne_prime(n: int) -> bool:
     """
     Given a number 'n', returns True if it is prime and its marsenne number is also prime
 
@@ -68,12 +70,12 @@ def is_marsenne_prime(n):
     Output:
     bool: True if n is marsenne prime, False otherwise
     """
-    if is_prime(n) and is_prime(marsenne(n)):
+    if is_prime(n) and is_prime(get_marsenne_number(n)):
         return True
     
     return False
 
-def is_sophie_prime(n):
+def is_sophie_prime(n: int) -> bool:
     """
     Given a number 'n', returns True if it is prime and its 
     sophie number (2*n+1) is also prime
@@ -91,7 +93,7 @@ def is_sophie_prime(n):
     
     return False
 
-def get_cunningham_chain(n, nmax=10**6, kind=1):
+def get_cunningham_chain(n: int, nmax: int=10**6, kind: int=1) -> List[int]:
     """
     Given a number 'n', returns the cunningham chain, where 
     n(i+1) = 2*n(i) + 1 if first kind, and
@@ -103,7 +105,7 @@ def get_cunningham_chain(n, nmax=10**6, kind=1):
     kind (1): chain kind, optional, by default 1, options are 1 or 2
 
     Output:
-    list: chain members
+    List[int]: chain members
     """
     if kind != 1 and kind != 2:
         raise ValueError(f'Chain kind must be \'1\' or \'2\'')
@@ -121,7 +123,7 @@ def get_cunningham_chain(n, nmax=10**6, kind=1):
     
     return output
 
-def get_goldbach_combinations(n):
+def get_goldbach_combinations(n: int) -> List[Tuple[int]]:
     """
     Given a number 'n', returns all goldbach combinations for that number 
     n = p + q, where p and q are prime numbers
@@ -130,13 +132,13 @@ def get_goldbach_combinations(n):
     n (int): number to test
 
     Output:
-    list: goldbach posibilities
+    List[Tuple[int]]: goldbach posibilities
     """
     if n % 2 and n <= 2:
         raise ValueError(f'n must be even and bigger than 2')
     
     output = []
-    nmax = math.ceil(n/2)
+    nmax = math.ceil(n/2)  # TODO
 
     for p in range(2, n):
         for q in range(2, n):

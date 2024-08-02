@@ -5,7 +5,7 @@ sys.path.append(r'/home/cmesado/Documents/programacion-recreativa')
 from ch1_primes.foo import (
     is_prime,
     are_twin_primes,
-    marsenne,
+    get_marsenne_number,
     is_marsenne_prime,
     is_sophie_prime,
     get_cunningham_chain,
@@ -42,9 +42,9 @@ def test_are_twin_primes():
 
 def test_marsenne():
 
-    assert marsenne(2) == 3
-    assert marsenne(4) == 15
-    assert marsenne(7) == 127
+    assert get_marsenne_number(2) == 3
+    assert get_marsenne_number(4) == 15
+    assert get_marsenne_number(7) == 127
 
 def test_is_marsenne_prime():
 
