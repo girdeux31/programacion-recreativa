@@ -2,7 +2,15 @@ import sys
 
 sys.path.append(r'/home/cmesado/Documents/programacion-recreativa')
 
-from primes.foo import is_prime, are_twin_primes, marsenne, is_marsenne_prime
+from ch1_primes.foo import (
+    is_prime,
+    are_twin_primes,
+    marsenne,
+    is_marsenne_prime,
+    is_sophie_prime,
+    get_cunningham_chain,
+    get_goldbach_combinations,
+)
 
 
 def test_is_prime():
@@ -44,3 +52,19 @@ def test_is_marsenne_prime():
     assert not is_marsenne_prime(4)
     assert not is_marsenne_prime(6)
     assert is_marsenne_prime(7)
+
+def test_is_sophie_prime():
+
+    assert is_sophie_prime(2)
+    assert not is_sophie_prime(47)
+
+def test_get_cunningham_chain():
+    
+    assert get_cunningham_chain(2) == [2, 5, 11, 23, 47]
+    assert get_cunningham_chain(89) == [89, 179, 359, 719, 1439, 2879]
+    assert get_cunningham_chain(100) == []
+
+def test_get_goldbach_combinations():
+
+    assert len(get_goldbach_combinations(14)) == 2
+    assert len(get_goldbach_combinations(222)) == 11
