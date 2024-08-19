@@ -1,13 +1,28 @@
-def is_divisor(b: int, a: int) -> bool:
+import math
+
+
+def get_consecutive_sums(a: int) -> list:
     """
-    Given 'a' and 'b', returns True if b is divisor of a
-    that is, the remainder of a/b is 0
+    Given a number 'a', returns a list of its consecutive sums
+    that is, b0+...+bn = a, where bi = b(i-1) +1
 
     Input:
-    a (int): number to test in the numerator
-    b (int): number to test in the denominator
+    a (int): number to test
 
     Output:
-    bool: True if if b is divisor of a, False otherwise
+    list: list of consecutive sums of a
     """
-    pass
+    output = []
+    max_b = math.ceil(a/2)
+
+    for b0 in range(max_b):
+        total = 0
+        for bi in range(b0, max_b+1):
+            total += bi
+            if total > a:
+                break
+            if total == a:
+                output.append(list(range(b0, bi+1)))
+                break
+
+    return output
