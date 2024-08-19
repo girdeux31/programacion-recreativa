@@ -3,7 +3,8 @@ import sys
 sys.path.append(r'/home/cmesado/Documents/programacion-recreativa')
 
 from ch4_miscellany.foo import (
-    get_consecutive_sums
+    get_consecutive_sums,
+    is_inverted_squared,
 )
 
 
@@ -22,3 +23,9 @@ def test_get_consecutive_sums():
     assert (cs_975[2][0], cs_975[2][-1]) == (25, 50)
     assert cs_975[-2] == [324, 325, 326]
     assert cs_975[-1] == [487, 488]
+
+def test_is_inverted_squared():
+
+    assert is_inverted_squared(12)
+    assert is_inverted_squared(13)
+    assert not is_inverted_squared(14)
