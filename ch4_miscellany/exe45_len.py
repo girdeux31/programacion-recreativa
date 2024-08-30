@@ -24,7 +24,7 @@ for a in range(2, max_number+1):
 
 plt.scatter(range(2, max_number+1), numbers, s=size, c=colors)
 plt.gca().set_ylim([0, y_max])
-plt.xlabel('a')
-plt.ylabel('Max Collatz of a')
+plt.xlabel('Input number')
+plt.ylabel('Collatz length')
 plt.savefig(file)
 plt.show()
