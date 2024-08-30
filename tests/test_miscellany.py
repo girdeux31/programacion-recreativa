@@ -5,6 +5,7 @@ sys.path.append(r'/home/cmesado/Documents/programacion-recreativa')
 from ch4_miscellany.foo import (
     get_consecutive_sums,
     is_inverted_squared,
+    get_digital_root,
 )
 
 
@@ -29,3 +30,9 @@ def test_is_inverted_squared():
     assert is_inverted_squared(12)
     assert is_inverted_squared(13)
     assert not is_inverted_squared(14)
+
+def test_get_digital_root():
+
+    assert get_digital_root(297) == 9
+    assert get_digital_root(10) == 1
+    assert get_digital_root(1) == 1

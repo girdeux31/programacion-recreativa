@@ -56,3 +56,24 @@ def is_inverted_squared(a: int) -> list:
     inv_a_2 = inverted(inverted(a)**2)
 
     return True if a_2 == inv_a_2 else False
+
+def get_digital_root(a: int) -> int:
+    """
+    Given a number 'a', returns a its digital root
+    that is, sum its digits recursively until a number with only one digit is obtained
+
+    Input:
+    a (int): number to test
+
+    Output:
+    int: digital root of a
+    """
+    a_str = str(a)
+
+    while len(a_str) > 1:
+        a = sum([int(i) for i in a_str])
+        a_str = str(a)
+
+    return a
+
+    
