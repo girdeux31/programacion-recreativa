@@ -76,4 +76,18 @@ def get_digital_root(a: int) -> int:
 
     return a
 
-    
+def is_powered_number(a: int, power: int=4) -> bool:
+    """
+    Given a number 'a', returns True if it is a powered number
+    that is, the sum of its digits to certain power gives the original number
+
+    Input:
+    a (int): number to test
+    power (int): power, optional, default is 4
+
+    Output:
+    bool: True if a is a powered number, False otherwise
+    """
+    b = sum([int(i)**power for i in str(a)])
+
+    return True if a == b else False

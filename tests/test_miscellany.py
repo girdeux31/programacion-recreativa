@@ -6,6 +6,7 @@ from ch4_miscellany.foo import (
     get_consecutive_sums,
     is_inverted_squared,
     get_digital_root,
+    is_powered_number,
 )
 
 
@@ -36,3 +37,8 @@ def test_get_digital_root():
     assert get_digital_root(297) == 9
     assert get_digital_root(10) == 1
     assert get_digital_root(1) == 1
+
+def test_is_powered_number():
+
+    assert is_powered_number(1634)
+    assert not is_powered_number(1635)
