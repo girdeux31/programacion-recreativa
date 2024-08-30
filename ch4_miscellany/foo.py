@@ -2,6 +2,18 @@ import math
 from typing import List
 
 
+def inverted(a: int) -> int:
+    """
+    Given a number 'a', returns a number with inverted digits 
+
+    Input:
+    a (int): number to test
+
+    Output:
+    int: number with inverted digits of 'a'
+    """
+    return int(str(abs(a))[::-1])
+
 def get_consecutive_sums(a: int) -> List[List[int]]:
     """
     Given a number 'a', returns a list of its consecutive sums
@@ -39,19 +51,6 @@ def is_inverted_squared(a: int) -> list:
     Output:
     bool: True if a is an inverted squared, False otherwise
     """
-
-    def inverted(a: int) -> int:
-        """
-        Given a number 'a', returns a number with inverted digits 
-
-        Input:
-        a (int): number to test
-
-        Output:
-        int: number with inverted digits of 'a'
-        """
-        return int(str(a)[::-1])
-
     a_2 = a**2
     inv_a_2 = inverted(inverted(a)**2)
 
@@ -91,3 +90,29 @@ def is_powered_number(a: int, power: int=4) -> bool:
     b = sum([int(i)**power for i in str(a)])
 
     return True if a == b else False
+
+def get_collatz_reduction(a: int, max_iterations: int=10**4) -> List[int]:
+    """
+    Given a number 'a', returns its Collatz reduction
+    that is, n/2 if a is even else 3n+1, recursively
+
+    Input:
+    a (int): number to test
+    max_iterations (int): maximum number of iterations, optional, default is 10**4
+
+    Output:
+    List[int]: iterations of Collatz conjecture
+    """
+    numbers = []
+    iteration = 0
+
+    while a != 1:
+        
+        iteration += 1
+        a = a/2 if a % 2 == 0 else 3*a+1
+        numbers.append(a)
+
+        if iteration > max_iterations:
+            break
+
+    return numbers

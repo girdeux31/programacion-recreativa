@@ -3,13 +3,21 @@ import sys
 sys.path.append(r'/home/cmesado/Documents/programacion-recreativa')
 
 from ch4_miscellany.foo import (
+    inverted,
     get_consecutive_sums,
     is_inverted_squared,
     get_digital_root,
     is_powered_number,
+    get_collatz_reduction,
 )
 
 
+def test_inverted():
+
+    assert inverted(123) == 321
+    assert inverted(10) == 1
+    assert inverted(1) == 1
+    
 def test_get_consecutive_sums():
 
     cs_33 = get_consecutive_sums(33)
@@ -42,3 +50,8 @@ def test_is_powered_number():
 
     assert is_powered_number(1634)
     assert not is_powered_number(1635)
+
+def test_get_collatz_reduction():
+
+    assert len(get_collatz_reduction(921)) == 129
+    assert get_collatz_reduction(921)[10] == 584
