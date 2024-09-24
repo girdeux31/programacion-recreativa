@@ -1,4 +1,5 @@
 import math
+import numpy as np
 from typing import List
 
 
@@ -40,7 +41,7 @@ def get_consecutive_sums(a: int) -> List[List[int]]:
 
     return output
 
-def is_inverted_squared(a: int) -> list:
+def is_inverted_squared(a: int) -> List:
     """
     Given a number 'a', returns True if it is an inverted squared
     that is, a**2 == a[::-1]**2
@@ -116,3 +117,52 @@ def get_collatz_reduction(a: int, max_iterations: int=10**4) -> List[int]:
             break
 
     return numbers
+
+def ethiopian_multiplication(a: int, b: int) -> int:
+    """
+    Given numbers a and b, returns its multiplication following ethiopian method
+
+    Input:
+    a (int): number to multiply
+    b (int): number to multiply by
+
+    Output:
+    int: result of multiplication
+    """
+    if a < 0 or b < 0:
+        raise ValueError(f'Both numbers must be 0 or positive')
+
+    b_org = b
+    iter_ = 0
+    b = b if a % 2 == 1 else 0
+
+    while a > 1:
+        iter_ += 1
+        a = a//2
+        if a % 2 == 1:
+            b += b_org * 2**iter_
+
+    return b
+
+def check_eulers_conjecture(coef: np.array(int), n: int) -> bool:
+    """
+    Given some coefficients and the exponential n, returns True if they break Euler's conjecture
+    that is, \sum_{i=1}^k a_i^n != b^n, where a and b != 0 and n > 2
+
+    Input:
+    coef (np.array(int)): numpy array of coefficients (!=0)
+    n (int): exponent of coefficients
+
+    Output:
+    bool: True if Euler's conjecture is right, False otherwise
+    """
+    if any(coef==0):
+        raise ValueError('All coefficients must be different than 0')
+
+    if n < 2:
+        raise ValueError('Parameter \'n\' must be 2 or bigger')
+
+    coef = np.power(coef, n)
+    coef[-1] *= -1
+
+    return True if np.sum(coef) == 0 else False

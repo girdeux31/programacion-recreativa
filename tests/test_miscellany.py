@@ -1,4 +1,5 @@
 import sys
+import numpy as np
 
 sys.path.append(r'/home/cmesado/Documents/programacion-recreativa')
 
@@ -9,6 +10,8 @@ from ch4_miscellany.foo import (
     get_digital_root,
     is_powered_number,
     get_collatz_reduction,
+    ethiopian_multiplication,
+    check_eulers_conjecture,
 )
 
 
@@ -55,3 +58,26 @@ def test_get_collatz_reduction():
 
     assert len(get_collatz_reduction(921)) == 129
     assert get_collatz_reduction(921)[10] == 584
+
+def test_ethiopian_multiplication():
+
+    assert ethiopian_multiplication(21, 42) == 882
+    assert ethiopian_multiplication(42, 21) == 882
+    assert ethiopian_multiplication(456582, 874354) == 399214298028
+    assert ethiopian_multiplication(456589, 874353) == 399219961917
+    assert ethiopian_multiplication(1, 20) == 20
+    assert ethiopian_multiplication(1, 15) == 15
+    assert ethiopian_multiplication(1, 1) == 1
+    assert ethiopian_multiplication(0, 1) == 0
+    assert ethiopian_multiplication(1, 0) == 0
+    assert ethiopian_multiplication(0, 0) == 0
+
+def test_check_eulers_conjecture():
+
+    assert check_eulers_conjecture(np.array([3, 4, 5]), 2)
+    assert check_eulers_conjecture(np.array([3, 4, 5, 6]), 3)
+    assert check_eulers_conjecture(np.array([95800, 217519, 414560, 422481]), 4)
+    assert check_eulers_conjecture(np.array([27, 84, 110, 133, 144]), 5)
+    assert check_eulers_conjecture(np.array([-220, 5027, 6237, 14068, 14132]), 5)
+    assert check_eulers_conjecture(np.array([55, 3183, 28969, 85282, 85359]), 5)
+    assert check_eulers_conjecture(np.array([90, 223, 478, 524, 748, 1088, 1190, 1324, 1409]), 8)
