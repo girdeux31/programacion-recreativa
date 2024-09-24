@@ -5,9 +5,11 @@ from foo import check_eulers_conjecture
 
 print('Exercise 4.7')
 
-# Euler's theorem
+# Euler's conjecture
 # \sum_{i=1}^k a_i^n != b^n
 # where a and b != 0 and n > 1
+
+# See some solutions in https://en.wikipedia.org/wiki/Euler%27s_sum_of_powers_conjecture
 
 # FIXME: too slow
 k = 4
