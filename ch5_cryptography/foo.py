@@ -1,6 +1,8 @@
 import string
 import math
 
+from typing import Optional
+
 
 def cesar_encode(msg: str, shift: int) -> str:
     """
@@ -42,22 +44,26 @@ def cesar_encode(msg: str, shift: int) -> str:
 
     return msg_encoded
 
-def transposition_encode(msg: str, n: int=None) -> str:
+def transposition_encode(msg: str, n: Optional[int]=None) -> str:
     """
     Encripts a message by applying transposition encoding (reorder the characters
     reading vertically in a table n*n)
-    It accepts kind of symbols
+    It accepts all kind of symbols
 
     Input:
     msg (str): message to encript
     n (int): table side, length of message must be equal or smaller than n*n,
-        it is optional, by default i calculates n so the text fits in the smaller possible table
+        it is optional, by default n is calculated so the text fits in the smaller possible table
 
     Output:
     str: encoded message
     """
+    if n < 2:
+        raise ValueError(f'Parameter \'n\' must be >= 2')
+
     if not n:
-        n = math.ceil(math.sqrt(msg))
+        n = math.ceil(math.sqrt(len(msg)))
+
     if len(msg) > n**2:
         raise ValueError(f'Length of message must be <= {n**2}')
     

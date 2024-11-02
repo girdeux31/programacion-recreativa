@@ -21,4 +21,8 @@ def test_cesar_encode():
 
 def test_transposition_encode():
 
-    assert transposition_encode('Esto es un secreto', 5) == 'Eest sseo t c  our   ne  '
+    assert transposition_encode('Esto es un secreto') == 'Ee e ssst t eo ouc   nr  '
+    assert transposition_encode('Esto es un secreto', 5) == 'Ee e ssst t eo ouc   nr  '
+    assert transposition_encode('Esto es un secreto muy guardado!', 6) == 'Ese uos cma!turur oneyd   t a esogd '
+    assert transposition_encode('Ese uos cma!turur oneyd   t a esogd ', 6) == 'Esto es un secreto muy guardado!    '
+
