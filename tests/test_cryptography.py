@@ -5,6 +5,8 @@ sys.path.append(r'/home/cmesado/Documents/programacion-recreativa')
 from ch5_cryptography.foo import (
     cesar_encode,
     transposition_encode,
+    is_only_ones_and_zeroes,
+    xor_encode,
 )
 
 
@@ -26,3 +28,14 @@ def test_transposition_encode():
     assert transposition_encode('Esto es un secreto muy guardado!', 6) == 'Ese uos cma!turur oneyd   t a esogd '
     assert transposition_encode('Ese uos cma!turur oneyd   t a esogd ', 6) == 'Esto es un secreto muy guardado!    '
 
+def test_is_only_ones_and_zeroes():
+
+    assert is_only_ones_and_zeroes('1')
+    assert is_only_ones_and_zeroes('0')
+    assert is_only_ones_and_zeroes('11010101011111000111')
+    assert not is_only_ones_and_zeroes('11010101011111000121')
+    
+def test_xor_encode():
+
+    assert xor_encode('100100', '0011') == '101000'
+    assert xor_encode('101000', '0011') == '100100'

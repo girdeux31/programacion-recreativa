@@ -58,11 +58,11 @@ def transposition_encode(msg: str, n: Optional[int]=None) -> str:
     Output:
     str: encoded message
     """
-    if n < 2:
-        raise ValueError(f'Parameter \'n\' must be >= 2')
-
     if not n:
         n = math.ceil(math.sqrt(len(msg)))
+
+    if n < 2:
+        raise ValueError(f'Parameter \'n\' must be >= 2')
 
     if len(msg) > n**2:
         raise ValueError(f'Length of message must be <= {n**2}')
@@ -74,4 +74,49 @@ def transposition_encode(msg: str, n: Optional[int]=None) -> str:
         for idx in range(0 + shift, len(msg), n):
             msg_encoded += msg[idx]
 
+    return msg_encoded
+
+def is_only_ones_and_zeroes(code: str):
+    """
+    True if string contains all 0s or 1s
+
+    Input:
+    code (str): string to check
+
+    Output:
+    bool: True if code is only 0s and 1s, False otherwise
+    """
+    return all([c in '01' for c in code])
+
+def xor_encode(msg: str, code: str) -> str:
+    """
+    Encripts a message with the xor operator and a code
+    xor operator is True when both inputs are different, and it is False when both inputs are equal
+    Message and code can only contain 1s or 0s
+
+    Input:
+    msg (str): message to encript
+    code (str): code used to encode and decode
+
+    Output:
+    str: encoded message
+    """
+    if not is_only_ones_and_zeroes(msg):
+        raise ValueError(f'Message {msg} have other characters than 1s and 0s')
+
+    if not is_only_ones_and_zeroes(code):
+        raise ValueError(f'Code {msg} have other characters than 1s and 0s')
+
+    c_idx = 0
+    msg_encoded = ''
+
+    for m_idx in range(len(msg)):
+        
+        m = msg[m_idx]
+        c_idx = 0 if c_idx == len(code) else c_idx
+        c = code[c_idx]
+        c_idx += 1
+
+        msg_encoded += str(int(m) ^ int(c))
+    
     return msg_encoded
