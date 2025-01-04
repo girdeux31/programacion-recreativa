@@ -7,6 +7,7 @@ from ch5_cryptography.foo import (
     transposition_encode,
     is_only_ones_and_zeroes,
     xor_encode,
+    vigenere_encode,
 )
 
 
@@ -34,8 +35,14 @@ def test_is_only_ones_and_zeroes():
     assert is_only_ones_and_zeroes('0')
     assert is_only_ones_and_zeroes('11010101011111000111')
     assert not is_only_ones_and_zeroes('11010101011111000121')
-    
+
 def test_xor_encode():
 
     assert xor_encode('100100', '0011') == '101000'
     assert xor_encode('101000', '0011') == '100100'
+
+def test_vigenere_encode():
+    
+    key = 'hack! $'
+    assert vigenere_encode('Th1s 1s V1g3n3r3 c0d3!_9', key) == '¼É\x94ÞAQ\x97\x88·\x94ÒT\x8eWÚ\x94\x83ÎQ\x84W\x89À\x9c'
+    assert vigenere_encode('¼É\x94ÞAQ\x97\x88·\x94ÒT\x8eWÚ\x94\x83ÎQ\x84W\x89À\x9c', key, decode=True) == 'Th1s 1s V1g3n3r3 c0d3!_9'

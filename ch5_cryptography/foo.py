@@ -120,3 +120,31 @@ def xor_encode(msg: str, code: str) -> str:
         msg_encoded += str(int(m) ^ int(c))
     
     return msg_encoded
+
+def vigenere_encode(msg: str, key: str, decode: bool=False) -> str:
+    """
+    Encripts a message by applying a delta in the alphabetical order
+    This delta is based on the key word
+    It accepts lower, upper and numbers, symbols are not encoded
+
+    Input:
+    msg (str): message to encript
+    key (str): key word to encode/decode, can contain any character
+    decode (bool): decodes message if True
+
+    Output:
+    str: encoded/decoded message
+    """
+    k_idx = 0
+    msg_encoded = ''
+    sign = -1 if decode else +1
+    
+    for m in msg:
+
+        k_idx = 0 if k_idx == len(key) else k_idx
+        int_encoded = ord(m) + ord(key[k_idx])*sign
+        chr_encoded = chr(int_encoded)
+        msg_encoded += chr_encoded
+        k_idx += 1
+
+    return msg_encoded
