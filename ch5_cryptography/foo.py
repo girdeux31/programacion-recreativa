@@ -3,15 +3,17 @@ import math
 
 from typing import Optional
 
+from ch5_cryptography.roman_system import RomanSystem
 
-def cesar_encode(msg: str, shift: int) -> str:
+
+def cesar_encoder(msg: str, shift: int) -> str:
     """
-    Encripts a message by applying a delta in the alphabetical order
+    Encrypt a message by applying a delta in the alphabetical order
     It accepts lower, upper and numbers, symbols are not encoded
 
     Input:
-    msg (str): message to encript
-    shift (int): number of letters to shift, use negative int to decode
+    msg (str): message to encrypt
+    shift (int): number of letters to shift
 
     Output:
     str: encoded message
@@ -44,28 +46,38 @@ def cesar_encode(msg: str, shift: int) -> str:
 
     return msg_encoded
 
-def transposition_encode(msg: str, n: Optional[int]=None) -> str:
+def cesar_decoder(msg: str, shift: int) -> str:
     """
-    Encripts a message by applying transposition encoding (reorder the characters
+    Decrypts a message encrypted by cesar encoding
+
+    Input:
+    msg (str): message to decrypt
+    shift (int): must be the same value used in the encoding
+
+    Output:
+    str: decoded message
+    """
+    msg_decoded = cesar_encoder(msg, -shift)
+
+    return msg_decoded
+
+def transposition_encoder(msg: str, n: int) -> str:
+    """
+    Encrypt a message by applying transposition encoding (reorder the characters
     reading vertically in a table n*n)
     It accepts all kind of symbols
 
     Input:
-    msg (str): message to encript
-    n (int): table side, length of message must be equal or smaller than n*n,
-        it is optional, by default n is calculated so the text fits in the smaller possible table
+    msg (str): message to encrypt
+    n (int): table side, length of message must be equal or smaller than n*n
 
     Output:
     str: encoded message
     """
-    if not n:
-        n = math.ceil(math.sqrt(len(msg)))
+    min_n = math.ceil(math.sqrt(len(msg)))
 
-    if n < 2:
-        raise ValueError(f'Parameter \'n\' must be >= 2')
-
-    if len(msg) > n**2:
-        raise ValueError(f'Length of message must be <= {n**2}')
+    if n < min_n:
+        raise ValueError(f'Parameter \'n\' must be equal or bigger than {min_n}')
     
     msg += ' ' * (n**2 - len(msg))
     msg_encoded = ''
@@ -75,6 +87,21 @@ def transposition_encode(msg: str, n: Optional[int]=None) -> str:
             msg_encoded += msg[idx]
 
     return msg_encoded
+
+def transposition_decoder(msg: str, n: int) -> str:
+    """
+    Decrypts a message encrypted by transposition encoding
+
+    Input:
+    msg (str): message to decrypt
+    n (int): must be the same value used in the encoding, mandatory
+
+    Output:
+    str: decoded message
+    """
+    msg_decoded = transposition_encoder(msg, n)
+
+    return msg_decoded
 
 def is_only_ones_and_zeroes(code: str):
     """
@@ -88,18 +115,18 @@ def is_only_ones_and_zeroes(code: str):
     """
     return all([c in '01' for c in code])
 
-def xor_encode(msg: str, code: str) -> str:
+def xor_encoder(msg: str, code: str) -> str:
     """
-    Encripts a message with the xor operator and a code
+    Encrypt a number with the xor operator and a code
     xor operator is True when both inputs are different, and it is False when both inputs are equal
-    Message and code can only contain 1s or 0s
+    Number and code can only contain 1s or 0s
 
     Input:
-    msg (str): message to encript
+    msg (str): number to encrypt
     code (str): code used to encode and decode
 
     Output:
-    str: encoded message
+    str: encoded number
     """
     if not is_only_ones_and_zeroes(msg):
         raise ValueError(f'Message {msg} have other characters than 1s and 0s')
@@ -121,23 +148,38 @@ def xor_encode(msg: str, code: str) -> str:
     
     return msg_encoded
 
-def vigenere_encode(msg: str, key: str, decode: bool=False) -> str:
+def xor_decoder(msg: str, code: str) -> str:
     """
-    Encripts a message by applying a delta in the alphabetical order
+    Decrypts a number encrypted by xor encoding
+
+    Input:
+    msg (str): number to decrypt
+    code (str): must be the same value used in the encoding
+
+    Output:
+    str: decoded number
+    """
+    msg_decoded = xor_encoder(msg, code)
+
+    return msg_decoded
+
+def vigenere_encoder(msg: str, key: str, _decode: Optional[bool]=False) -> str:
+    """
+    Encrypt a message by applying a delta in the alphabetical order
     This delta is based on the key word
     It accepts lower, upper and numbers, symbols are not encoded
 
     Input:
-    msg (str): message to encript
+    msg (str): message to encrypt
     key (str): key word to encode/decode, can contain any character
-    decode (bool): decodes message if True
+    _decode (bool): only internal use
 
     Output:
     str: encoded/decoded message
     """
     k_idx = 0
     msg_encoded = ''
-    sign = -1 if decode else +1
+    sign = -1 if _decode else +1
     
     for m in msg:
 
@@ -148,3 +190,47 @@ def vigenere_encode(msg: str, key: str, decode: bool=False) -> str:
         k_idx += 1
 
     return msg_encoded
+
+def vigenere_decoder(msg: str, key: str) -> str:
+    """
+    Decrypts a message encrypted by vigenere encoding
+
+    Input:
+    msg (str): message to decrypt
+    key (str): must be the same value used in the encoding
+
+    Output:
+    str: decoded message
+    """
+    msg_decoded = vigenere_encoder(msg, key, _decode=True)
+
+    return msg_decoded
+
+def roman_encoder(number: int) -> str:
+    """
+    Encrypt a number using roman system
+    Message only accepts I, V, X, L, C, D, M
+
+    Input:
+    number (int): decimal number to encrypt
+
+    Output:
+    str: encoded roman number
+    """
+    msg_encoded = RomanSystem.decimal_to_roman(number)
+
+    return msg_encoded
+
+def roman_decoder(number: str) -> int:
+    """
+    Decrypts a number encrypted by roman encoding
+
+    Input:
+    number (str): roman number to decrypt
+
+    Output:
+    int: decoded decimal number
+    """
+    msg_decoded = RomanSystem.roman_to_decimal(number)
+
+    return msg_decoded
