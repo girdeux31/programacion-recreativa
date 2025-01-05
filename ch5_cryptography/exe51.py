@@ -1,4 +1,4 @@
-from foo import cesar_encode
+from foo import cesar_encoder, cesar_decoder
 
 
 print('Exercise 5.1')
@@ -8,8 +8,8 @@ delta = 3
 
 print(f'Original message is \'{message}\'')
 
-coded_message = cesar_encode(message, delta)
+coded_message = cesar_encoder(message, delta)
 print(f'Coded message is \'{coded_message}\'')
 
-decoded_message = cesar_encode(coded_message, -delta)
+decoded_message = cesar_decoder(coded_message, delta)
 print(f'Decoded message is \'{decoded_message}\'')

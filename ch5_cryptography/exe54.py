@@ -1,4 +1,4 @@
-from foo import vigenere_encode
+from foo import vigenere_encoder, vigenere_decoder
 
 
 print('Exercise 5.4')
@@ -8,8 +8,8 @@ key = 'hack! $'
 
 print(f'Original message is \'{message}\'')
 
-coded_message = vigenere_encode(message, key)
+coded_message = vigenere_encoder(message, key)
 print(f'Coded message is \'{coded_message}\'')
 
-decoded_message = vigenere_encode(coded_message, key, decode=True)
+decoded_message = vigenere_decoder(coded_message, key)
 print(f'Decoded message is \'{decoded_message}\'')

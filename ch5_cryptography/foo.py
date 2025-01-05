@@ -126,7 +126,7 @@ def xor_encoder(msg: str, code: str) -> str:
 
     Input:
     msg (str): number to encrypt
-    code (str): code used to encode and decode
+    code (str): code used to encode
 
     Output:
     str: encoded number
@@ -170,15 +170,14 @@ def vigenere_encoder(msg: str, key: str, _decode: Optional[bool]=False) -> str:
     """
     Encrypt a message by applying a delta in the alphabetical order
     This delta is based on the key word
-    It accepts lower, upper and numbers, symbols are not encoded
 
     Input:
     msg (str): message to encrypt
-    key (str): key word to encode/decode, can contain any character
+    key (str): key word to encode, can contain any character
     _decode (bool): only internal use
 
     Output:
-    str: encoded/decoded message
+    str: encoded message
     """
     k_idx = 0
     msg_encoded = ''

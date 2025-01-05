@@ -1,4 +1,4 @@
-from foo import transposition_encode
+from foo import transposition_encoder, transposition_decoder
 
 
 print('Exercise 5.2')
@@ -8,8 +8,8 @@ delta = 6
 
 print(f'Original message is \'{message}\'')
 
-coded_message = transposition_encode(message, delta)
+coded_message = transposition_encoder(message, delta)
 print(f'Coded message is \'{coded_message}\'')
 
-decoded_message = transposition_encode(coded_message, delta)
+decoded_message = transposition_decoder(coded_message, delta)
 print(f'Decoded message is \'{decoded_message}\'')
