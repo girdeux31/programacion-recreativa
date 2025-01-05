@@ -1,7 +1,10 @@
+import sys
 import string
 import math
 
 from typing import Optional
+
+sys.path.append(r'/home/cmesado/Documents/programacion-recreativa')
 
 from ch5_cryptography.roman_system import RomanSystem
 
