@@ -1,7 +1,7 @@
 import heapq
 
 
-def humming_seq(n: int, primes: list[int]=[2, 3, 5]) -> list[int]:
+def humming_seq(n: int, primes: list[int]=[2, 3, 5]) -> int:
     """
     Given 'n', returns the nth number of the Humming sequence for these primes
     Hn(primes), that is the nth integers whose only divisors are the primes listed
@@ -13,11 +13,11 @@ def humming_seq(n: int, primes: list[int]=[2, 3, 5]) -> list[int]:
     https://rcbj.net/2007/01/30/the-first-1500-hamming-numbers
 
     Input:
-    n (int): elements in the sequence
+    n (int): element in the sequence to return
     primes list[int]: primes for the Humming sequence
 
     Output:
-    list[int]: sequence
+    int: nth element in the sequence
     """
     if n < 1:
         raise ValueError('Parameter \'n\' must be a positive integer')
@@ -37,3 +37,28 @@ def humming_seq(n: int, primes: list[int]=[2, 3, 5]) -> list[int]:
                 heapq.heappush(heap, next_val)
     
     return hamming[-1]
+
+def padovan_seq(n: int) -> int:
+    """
+    Given 'n', returns the nth number of the Padovan sequence
+
+    P0 = P1 = P2 = 1
+    Pn = P(n-2) + P(n-3)
+
+    Input:
+    n (int): element in the sequence to return
+
+    Output:
+    int: nth element in the sequence
+    """
+    if n < 1:
+        raise ValueError('Parameter \'n\' must be a positive integer')
+    
+    padovan = [1] * 3
+
+    for _ in range(3, n):
+
+        value = padovan[-2] + padovan[-3]
+        padovan.append(value)
+
+    return padovan[-1]
