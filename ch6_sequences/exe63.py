@@ -1,9 +1,9 @@
-from foo import primorial
+from foo import primorial_seq
 
 
 print('Exercise 6.3')
+n = 50
+sequence = primorial_seq(n)
 
-limit = 20
-for n in range(1, limit+1):
-    value = primorial(n)
-    print(value)
+print(sequence)
+print(len(sequence))

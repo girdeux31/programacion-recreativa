@@ -6,3 +6,4 @@ n = 100
 sequence = humming_seq(n)
 
 print(sequence)
+print(len(sequence))

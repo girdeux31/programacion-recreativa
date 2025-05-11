@@ -26,34 +26,33 @@ def is_prime(n: int) -> bool:
 
     return all(remainders)
 
-def humming_seq(n: int, primes: list[int]=[2, 3, 5]) -> int:
+def humming_seq(n: int, primes: list[int]=[2, 3, 5]) -> list[int]:
     """
-    Given 'n', returns the nth number of the Humming sequence for these primes
-    Hn(primes), that is the nth integers whose only divisors are the primes listed
+    Given 'n', returns the Humming sequence up to the nth element for these primes
+    For primes 2, 3 and 5, the sequence contains the product of powers of 2, 3, and 5
 
     For example: H(2,3,5) = 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, …
-    so H5(2, 3, 5) = 6
 
     Check out the first 1500 numbers of the Humming sequence H(2,3,5)
     https://rcbj.net/2007/01/30/the-first-1500-hamming-numbers
 
     Input:
-    n (int): element in the sequence to return
+    n (int): sequence limit
     primes list[int]: primes for the Humming sequence
 
     Output:
-    int: nth element in the sequence
+    list[int]: sequence
     """
     if n < 1:
         raise ValueError('Parameter \'n\' must be a positive integer')
     
-    hamming = []
+    sequence = []
     seen = set()
     heap = [1]
     
     for _ in range(n):
         val = heapq.heappop(heap)
-        hamming.append(val)
+        sequence.append(val)
         
         for factor in primes:
             next_val = val * factor
@@ -61,9 +60,9 @@ def humming_seq(n: int, primes: list[int]=[2, 3, 5]) -> int:
                 seen.add(next_val)
                 heapq.heappush(heap, next_val)
     
-    return hamming[-1]
+    return sequence
 
-def padovan_seq(n: int) -> int:
+def padovan_seq(n: int) -> list[int]:
     """
     Given 'n', returns the nth number of the Padovan sequence
 
@@ -71,22 +70,22 @@ def padovan_seq(n: int) -> int:
     Pn = P(n-2) + P(n-3)
 
     Input:
-    n (int): element in the sequence to return
+    n (int): sequence limit
 
     Output:
-    int: nth element in the sequence
+    list[int]: sequence
     """
     if n < 1:
         raise ValueError('Parameter \'n\' must be a positive integer')
     
-    padovan = [1] * 3
+    sequence = [1] * 3
 
     for _ in range(3, n):
 
-        value = padovan[-2] + padovan[-3]
-        padovan.append(value)
+        value = sequence[-2] + sequence[-3]
+        sequence.append(value)
 
-    return padovan[-1]
+    return sequence
 
 def primorial(n: int) -> int:
     """
@@ -99,5 +98,57 @@ def primorial(n: int) -> int:
     int
     """
     output = math.prod([p for p in range(2, n+1) if is_prime(p)])
-    
     return output
+
+def primorial_seq(n: int) -> list[int]:
+    """
+    Given 'n', returns the primorial sequence up to the nth element
+
+    Input:
+    n (int): sequence limit
+
+    Output:
+    list[int]: sequence
+    """
+    if n < 1:
+        raise ValueError('Parameter \'n\' must be a positive integer')
+    
+    sequence = [primorial(a) for a in range(1, n+1)]
+    return sequence
+
+def is_harshad(n: int) -> bool:
+    """
+    Given 'n', returns True if n is a harshad number, that is n is divisible by the sum of its digits
+
+    Input:
+    n (int): number to check
+
+    Output:
+    bool: True if n is a harshad number, False otherwise
+    """
+    d_sum = sum([int(d) for d in str(n)])
+    return True if n % d_sum == 0 else False
+
+def harshad_seq(n: int) -> list[int]:
+    """
+    Given 'n', returns the Harshad sequence up to the nth element (in base 10)
+
+    Input:
+    n (int): sequence limit
+
+    Output:
+    list[int]: sequence
+    """
+    if n < 1:
+        raise ValueError('Parameter \'n\' must be a positive integer')
+    
+    a = 0
+    sequence = []
+
+    while len(sequence) < n:
+        
+        a += 1
+        if is_harshad(a):
+            sequence.append(a)
+
+    return sequence

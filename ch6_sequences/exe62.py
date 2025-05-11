@@ -6,3 +6,4 @@ n = 50
 sequence = padovan_seq(n)
 
 print(sequence)
+print(len(sequence))
