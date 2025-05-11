@@ -1,5 +1,30 @@
+import math
 import heapq
 
+
+def is_prime(n: int) -> bool:
+    """
+    Given a number 'n', returns True if it is prime
+
+    Input:
+    n (int): number to test
+
+    Output:
+    bool: True if n is prime, False otherwise
+    """
+    if not isinstance(n, int):
+        raise ValueError(f'Number \'n\' must be an integer')
+
+    if n < 2:
+        return False
+
+    if n == 2:
+        return True
+        
+    upper_limit = math.ceil(math.sqrt(n))
+    remainders = [n % i for i in range(2, upper_limit+1)]
+
+    return all(remainders)
 
 def humming_seq(n: int, primes: list[int]=[2, 3, 5]) -> int:
     """
@@ -62,3 +87,17 @@ def padovan_seq(n: int) -> int:
         padovan.append(value)
 
     return padovan[-1]
+
+def primorial(n: int) -> int:
+    """
+    Given 'n', returns the primorial of n, that is the product of all primes lower or equal than n
+
+    Input:
+    n (int): primorial to compute
+
+    Output:
+    int
+    """
+    output = math.prod([p for p in range(2, n+1) if is_prime(p)])
+    
+    return output

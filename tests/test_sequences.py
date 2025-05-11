@@ -5,6 +5,7 @@ sys.path.append(r'/home/cmesado/Documents/programacion-recreativa')
 from ch6_sequences.foo import (
     humming_seq,
     padovan_seq,
+    primorial,
 )
 
 
@@ -20,3 +21,9 @@ def test_padovan_seq():
     assert padovan_seq(6) == 3
     assert padovan_seq(10) == 9
     assert padovan_seq(50) == 696081
+
+def test_primorial():
+
+    assert primorial(3) == 6
+    assert primorial(10) == 210
+    assert primorial(20) == 9699690
