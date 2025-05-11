@@ -1,7 +1,5 @@
 import math
 
-from typing import List
-
 
 def is_divisor(b: int, a: int) -> bool:
     """
@@ -20,7 +18,7 @@ def is_divisor(b: int, a: int) -> bool:
 
     return not a % b
 
-def get_all_divisors(a: int) -> List[int]:
+def get_all_divisors(a: int) -> list[int]:
     """
     Given a number 'a', returns all its divisors
 
