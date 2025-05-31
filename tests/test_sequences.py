@@ -9,6 +9,7 @@ from ch6_sequences.foo import (
     primorial_seq,
     is_harshad,
     harshad_seq,
+    is_absolute_prime,
 )
 
 
@@ -56,3 +57,10 @@ def test_harshad_seq():
     assert harshad_seq(12)[-1] == 18
     assert harshad_seq(20)[-1] == 42
     assert harshad_seq(40)[-1] == 117
+
+def test_is_absolute_prime():
+
+    assert is_absolute_prime(13)
+    assert is_absolute_prime(337)
+    assert not is_absolute_prime(338)
+    assert not is_absolute_prime(2000)

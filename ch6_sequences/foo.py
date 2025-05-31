@@ -1,7 +1,9 @@
 import math
 import heapq
+import itertools
 
 
+# From chapter 1
 def is_prime(n: int) -> bool:
     """
     Given a number 'n', returns True if it is prime
@@ -149,6 +151,51 @@ def harshad_seq(n: int) -> list[int]:
         
         a += 1
         if is_harshad(a):
+            sequence.append(a)
+
+    return sequence
+
+def is_absolute_prime(n: int) -> bool:
+    """
+    Given 'n', returns True if n is an absolute prime number, that is all 
+    permutations of the digits of n are primes
+
+    Input:
+    n (int): number to check
+
+    Output:
+    bool: True if n is an absolute prime, False otherwise
+    """
+    digits = [d for d in str(n)]
+    permutations = itertools.permutations(digits, len(digits))
+        
+    return all(
+        [
+            is_prime(int(''.join(permutation)))
+            for permutation in permutations
+        ]
+    )
+
+def absolute_prime_seq(n: int) -> list[int]:
+    """
+    Given 'n', returns the absolute prime sequence up to the nth element
+
+    Input:
+    n (int): sequence limit
+
+    Output:
+    list[int]: sequence
+    """
+    if n < 1:
+        raise ValueError('Parameter \'n\' must be a positive integer')
+    
+    a = 0
+    sequence = []
+
+    while len(sequence) < n:
+        
+        a += 1
+        if is_absolute_prime(a):
             sequence.append(a)
 
     return sequence
